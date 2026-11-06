@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>¡Gracias por tu mensaje! | Dr. Carlos Gómez - Cirujano Bariátrico</title>
+  <meta name="description" content="Hemos recibido tu solicitud. El equipo del Dr. Carlos Gómez se comunicará contigo a la brevedad posible para coordinar tu consulta.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://www.drcarlosgomez.doc.ec/gracias.html">
+
+  <!-- Open Graph / WhatsApp / Facebook Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.drcarlosgomez.doc.ec/gracias.html">
+  <meta property="og:title" content="¡Gracias por tu mensaje! | Dr. Carlos Gómez">
+  <meta property="og:description" content="Hemos recibido tu solicitud con éxito. Te contactaremos en breve para coordinar los detalles de tu consulta.">
+  <meta property="og:image" content="https://www.drcarlosgomez.doc.ec/images/dr-carlos-gomez-bariatrico-en-ecuador.jpg">
+  <meta property="og:image:secure_url" content="https://www.drcarlosgomez.doc.ec/images/dr-carlos-gomez-bariatrico-en-ecuador.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="600">
+  <meta property="og:image:height" content="372">
+  <meta property="og:site_name" content="Dr. Carlos Gómez · Cirujano Bariátrico">
+  <meta property="og:locale" content="es_EC">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="¡Gracias por tu mensaje! | Dr. Carlos Gómez">
+  <meta name="twitter:description" content="Hemos recibido tu solicitud con éxito. Te contactaremos en breve.">
+  <meta name="twitter:image" content="https://www.drcarlosgomez.doc.ec/images/dr-carlos-gomez-bariatrico-en-ecuador.jpg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  </noscript>
+
+  <style>
+    :root {
+      --primary: #0a6fb8;
+      --navy: #0d2a44;
+      --navy-dark: #07192b;
+      --text: #0d2a44;
+      --muted: #4b647d;
+      --bg-soft: #eaf4fc;
+      --white: #ffffff;
+      --success: #10b981;
+      --border: rgba(211, 227, 240, 0.7);
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      color: var(--text);
+      background-color: var(--navy-dark);
+    }
+
+    /* Hero Background Wrapper con Imagen de Quirófano y Overlay Elegante */
+    .hero-wrapper {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      background: 
+        linear-gradient(135deg, rgba(7, 25, 43, 0.88) 0%, rgba(10, 111, 184, 0.78) 100%),
+        url('images/dr-carlos-gomez-quirofano-especializado-para-cirugia-bariatrica-en-guayaquil.jpg') center center / cover no-repeat;
+      overflow: hidden;
+    }
+
+    /* Destello sutil ambiental */
+    .hero-wrapper::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.25) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Tarjeta Central Flotante */
+    .thanks-card {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 780px;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.2);
+      padding: clamp(32px, 5vw, 56px);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeInCard .5s ease-out;
+    }
+
+    @keyframes fadeInCard {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Icono de Verificación */
+    .icon-success-wrap {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e8fbf3 0%, #d1f7e4 100%);
+      border: 2px solid #86efac;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--success);
+      margin-bottom: 20px;
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.25);
+    }
+
+    /* Badge Superior */
+    .badge-pill {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--bg-soft);
+      border: 1px solid #c8e2f5;
+      padding: 6px 16px;
+      border-radius: 999px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    /* Título y Descripción */
+    .thanks-title {
+      margin: 0 0 14px;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+    }
+
+    .thanks-desc {
+      margin: 0 0 32px;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 600px;
+    }
+
+    /* Caja de Próximos Pasos */
+    .steps-container {
+      width: 100%;
+      background: #f7fbfe;
+      border: 1px solid #dcebf6;
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+
+    .steps-title {
+      margin: 0 0 16px;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--navy);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 16px;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .step-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--white);
+      font-weight: 800;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+    }
+
+    .step-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .step-info strong {
+      font-size: 14px;
+      color: var(--navy);
+    }
+
+    .step-info span {
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--muted);
+    }
+
+    /* Botones de Acción */
+    .actions-wrap {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .2s ease;
+      line-height: 1.2;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-whatsapp {
+      background: #25D366;
+      color: var(--white);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+    }
+
+    .btn-whatsapp:hover {
+      background: #1eb755;
+      color: var(--white);
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: var(--white);
+      border: 1.5px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    /* Barra de Credenciales */
+    .doctor-credentials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 20px;
+      justify-content: center;
+      font-size: 12.5px;
+      color: var(--muted);
+      padding-top: 20px;
+      border-top: 1px solid #eef4f9;
+      width: 100%;
+    }
+
+    .doctor-credentials span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .doctor-credentials strong {
+      color: var(--navy);
+    }
+
+    @media (max-width: 640px) {
+      .hero-wrapper {
+        padding: 24px 16px;
+      }
+      .actions-wrap .btn {
+        width: 100%;
+      }
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fullscreen Hero Centrado -->
+  <main class="hero-wrapper">
+    <div class="thanks-card">
+      
+      <!-- Icono de Éxito -->
+      <div class="icon-success-wrap" aria-hidden="true">
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+
+      <span class="badge-pill">Solicitud Recibida</span>
+      <h1 class="thanks-title">¡Gracias por contactarnos!</h1>
+      <p class="thanks-desc">
+        Hemos recibido tu mensaje con éxito. Nuestro equipo médico y de atención al paciente está evaluando tu consulta y se comunicará contigo a la brevedad para coordinar tu cita de valoración o resolver cualquier inquietud.
+      </p>
+
+      <!-- Pasos Siguientes -->
+      <div class="steps-container">
+        <div class="steps-title">¿Qué sucede ahora?</div>
+        <div class="steps-grid">
+          <div class="step-item">
+            <span class="step-badge">1</span>
+            <div class="step-info">
+              <strong>Revisión Médica</strong>
+              <span>Revisamos tu requerimiento para ofrecerte la mejor orientación.</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-badge">2</span>
+            <div class="step-info">
+              <strong>Contacto Directo</strong>
+              <span>Te escribiremos por WhatsApp o te llamaremos para acordar tu fecha.</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-badge">3</span>
+            <div class="step-info">
+              <strong>Tu Valoración</strong>
+              <span>Consulta integral con el Dr. Carlos Gómez en Agora Medical Center.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botones de Acción -->
+      <div class="actions-wrap">
+         
+        <a href="index.html" class="btn btn-outline">
+          ← Volver a la página principal
+        </a>
+      </div>
+
+      <!-- Credenciales del Doctor -->
+      <div class="doctor-credentials">
+        <span>✓ <strong>Dr. Carlos Gómez</strong> · MD FACS</span>
+        <span>✓ <strong>Agora Medical Center</strong> · Guayaquil</span>
+        <span>✓ <strong>+1.500</strong> Cirugías Exitosas</span>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>
