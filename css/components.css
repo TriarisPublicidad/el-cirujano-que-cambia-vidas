@@ -1,0 +1,585 @@
+/* ==========================================================================
+   COMPONENTES · Un bloque por sección de index.html, en el mismo orden
+   ========================================================================== */
+
+/* ---------- Tarjeta base (procedimientos, pasos, razones, financiamiento) ----------
+   Borde dorado, brillo que sigue al mouse (--mouse-x/y desde main.js) y línea inferior al hover */
+.card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(165deg, rgba(20, 23, 28, 0.88) 0%, rgba(11, 13, 16, 0.96) 100%);
+  border: 1px solid var(--hairline);
+  transition: transform 0.45s var(--ease), border-color 0.45s var(--ease), box-shadow 0.45s var(--ease), background 0.45s ease;
+}
+.card::before {
+  content: "";
+  position: absolute; inset: 0; z-index: 2;
+  background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(197, 177, 145, 0.11), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+}
+.card::after {
+  content: "";
+  position: absolute; bottom: 0; left: 0; z-index: 3;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  transform: scaleX(0);
+  transition: transform 0.5s var(--ease);
+  pointer-events: none;
+}
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold);
+  box-shadow: 0 22px 48px -12px rgba(0, 0, 0, 0.85), 0 0 25px -4px rgba(197, 177, 145, 0.25);
+}
+.card:hover::before { opacity: 1; }
+.card:hover::after { transform: scaleX(1); }
+
+/* ==========================================================================
+   1. CABECERA (barra superior + navegación) — se oculta al bajar y aparece al subir
+   ========================================================================== */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  background: linear-gradient(180deg, rgba(9, 10, 12, 0.92) 0%, rgba(9, 10, 12, 0.62) 60%, rgba(9, 10, 12, 0) 100%);
+  transition: transform 0.48s var(--ease), background 0.35s ease, backdrop-filter 0.35s ease;
+  will-change: transform;
+}
+.site-header.header-hidden { transform: translateY(-100%); }
+.site-header.header-scrolled {
+  background: linear-gradient(180deg, rgba(9, 10, 12, 0.96) 0%, rgba(9, 10, 12, 0.82) 72%, rgba(9, 10, 12, 0) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.topbar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+  padding-block: 12px;
+  font-size: 11.5px; letter-spacing: 0.5px; color: var(--stone);
+  border-bottom: 1px solid rgba(210, 194, 168, 0.22);
+}
+.topbar__link { display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s; }
+.topbar__link:hover { color: var(--gold); }
+.topbar__link .icon { color: var(--gold); stroke-width: 1.5; transition: transform 0.2s; }
+.topbar__link:hover .icon { transform: scale(1.1); }
+.topbar__link strong { font-weight: 400; color: var(--alabaster); }
+.topbar__link:hover strong { color: var(--gold); }
+
+.navbar { height: 84px; }
+.navbar__inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.navbar__logo img { width: 155px; max-height: 76px; object-fit: contain; }
+.navbar__menu { display: none; align-items: center; gap: 22px; font-size: 12px; line-height: 18px; letter-spacing: 0.6px; color: var(--stone); }
+.navbar__menu a { transition: color 0.2s; }
+.navbar__menu a:hover { color: var(--gold); }
+.navbar__cta {
+  flex-shrink: 0;
+  padding: 11px 16px 12.3px;
+  font-size: 10.9px; line-height: 16.32px; letter-spacing: 2.72px; text-transform: uppercase;
+  color: var(--alabaster);
+  background: var(--gold-tint);
+  border: 1px solid var(--gold);
+  transition: all 0.3s;
+}
+.navbar__cta:hover { background: var(--gold); color: var(--obsidian); }
+@media (min-width: 640px) {
+  .navbar__logo img { width: 189px; }
+  .navbar__cta { padding-inline: 20px; }
+}
+@media (min-width: 1024px) { .navbar { height: 96px; } }
+@media (min-width: 1280px) { .navbar__menu { display: flex; } }
+
+/* ---------- Contenido principal: "telón" que se levanta y revela #cita ---------- */
+.curtain {
+  position: relative; z-index: 20;
+  background: var(--obsidian);
+  border-bottom: 1px solid rgba(210, 194, 168, 0.22);
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.95);
+}
+
+/* ==========================================================================
+   2. HERO
+   ========================================================================== */
+.hero { position: relative; width: 100%; overflow: hidden; padding-top: 118px; }
+.hero__bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; user-select: none; opacity: 0; transition: opacity 1.65s var(--ease); }
+.hero__bg.bg-is-visible { opacity: 1; }
+.hero__zoom { width: 100%; height: 100%; transform: scale(1); transition: transform 4.5s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
+.hero__zoom.hero-zoomed { transform: scale(1.06); }
+.hero__img { width: 100%; height: 115%; object-fit: cover; object-position: center; }
+.hero__shade-x { position: absolute; inset: 0; background: linear-gradient(to right, #000, rgba(0, 0, 0, 0.4), transparent); }
+.hero__shade-y { position: absolute; inset: 0; background: linear-gradient(to top, var(--obsidian), transparent, rgba(0, 0, 0, 0.2)); }
+
+.hero__content { position: relative; z-index: 10; padding-block: 56px 64px; }
+.hero__copy { max-width: 592px; display: flex; flex-direction: column; gap: 31.2px; }
+.hero__copy .eyebrow::before { width: 48px; }
+.hero__title {
+  font-family: var(--font-serif); font-weight: 500;
+  font-size: 46px; line-height: 1.02; letter-spacing: -0.72px;
+  color: var(--alabaster);
+}
+.hero__title em { font-style: italic; font-weight: 400; color: var(--gold); }
+.hero__text { font-weight: 300; color: var(--stone); }
+.hero__actions { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; padding-top: 8.8px; }
+@media (min-width: 640px) { .hero__title { font-size: 60px; } }
+@media (min-width: 1024px) {
+  .hero { padding-top: 130px; }
+  .hero__content { padding-top: 84px; }
+  .hero__title { font-size: 70px; }
+}
+
+/* ==========================================================================
+   3. CERTIFICACIONES
+   ========================================================================== */
+.certs { position: relative; padding-block: 64px; background: rgba(9, 10, 12, 0.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.certs .container { display: flex; flex-direction: column; }
+.certs__grid { display: grid; grid-template-columns: 1fr; }
+.cert { display: flex; align-items: center; gap: 16px; padding: 24px; }
+.cert__badge {
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  width: 76px; height: 76px; padding: 4px;
+  background: var(--ivory); border-radius: 2px; opacity: 0.75; transition: opacity 0.2s;
+}
+.cert:hover .cert__badge { opacity: 1; }
+.cert__badge img { max-width: 68px; max-height: 68px; object-fit: contain; }
+.cert__text { display: flex; flex-direction: column; gap: 6px; }
+.cert__name { font-family: var(--font-serif); font-size: 28px; line-height: 34px; color: var(--alabaster); transition: color 0.2s; }
+.cert:hover .cert__name { color: var(--gold); }
+.cert__name--gold { color: var(--gold); }
+.cert__desc { font-size: 12px; line-height: 16px; letter-spacing: 0.6px; text-transform: uppercase; color: var(--stone); }
+
+/* Franja de divisores usada por certificaciones y KPIs */
+.divided > * + * { border-top: 1px solid var(--hairline); }
+@media (min-width: 640px) {
+  .certs__grid { grid-template-columns: repeat(2, 1fr); }
+  .cert__name { font-size: 32px; }
+  .divided > * + * { border-top: 0; border-left: 1px solid var(--hairline); }
+}
+@media (min-width: 1024px) {
+  .certs__grid { grid-template-columns: repeat(3, 1fr); }
+  .cert { padding: 32px; }
+}
+
+/* ==========================================================================
+   4. EL CIRUJANO
+   ========================================================================== */
+.surgeon { position: relative; width: 100%; overflow: hidden; }
+.surgeon__orb {
+  position: absolute; top: -96px; left: -96px; width: 480px; height: 480px;
+  border-radius: 50%; background: rgba(197, 177, 145, 0.05); filter: blur(110px); pointer-events: none;
+}
+.surgeon__inner { position: relative; z-index: 10; padding-block: 96px; }
+.surgeon__grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
+
+.portrait { position: relative; }
+.portrait__frame { padding: 1px; background: var(--onyx); border: 1px solid var(--hairline); }
+.portrait__photo { position: relative; width: 100%; aspect-ratio: 584 / 730; overflow: hidden; background: var(--onyx); }
+.portrait__photo img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); }
+.portrait__stat {
+  max-width: 260px; margin-top: 16px; padding: 20px;
+  background: rgba(23, 25, 30, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--hairline); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+.portrait__stat strong { display: block; margin-bottom: 4px; font-family: var(--font-serif); font-size: 36px; font-weight: 400; line-height: 40px; color: var(--viridian); }
+.portrait__stat span { font-size: 12px; line-height: 16px; color: var(--stone); }
+
+.bio { display: flex; flex-direction: column; gap: 24px; }
+.bio__text { padding-top: 7px; font-weight: 300; color: var(--stone); }
+.bio__quote { padding: 4px 0 4px 20px; border-left: 2px solid var(--gold); }
+.bio__quote p { font-family: var(--font-serif); font-style: italic; color: var(--alabaster); }
+.bio__sign { padding-top: 16px; }
+.bio__sign img { width: auto; max-width: 350px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.85; transition: opacity 0.2s; }
+.bio__sign img:hover { opacity: 1; }
+.bio__role { display: block; margin-top: 2px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--gold); }
+
+.kpis {
+  display: grid; grid-template-columns: 1fr;
+  background: rgba(9, 10, 12, 0.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-block: 1px solid var(--hairline);
+}
+.kpi { display: flex; flex-direction: column; gap: 8px; padding: 24px; }
+.kpi__value { font-family: var(--font-serif); font-size: 40px; line-height: 48px; color: var(--alabaster); }
+.kpi__value--gold { color: var(--gold); }
+.kpi__label { font-size: 12px; line-height: 16px; letter-spacing: 0.6px; text-transform: uppercase; color: var(--stone); }
+
+@media (min-width: 640px) {
+  .portrait__stat { position: absolute; bottom: 32px; left: -16px; margin-top: 0; padding: 21px; }
+  .bio__quote { padding-left: 24px; }
+  .kpis { grid-template-columns: repeat(2, 1fr); }
+  .kpi__value { font-size: 48px; }
+}
+@media (min-width: 1024px) {
+  .surgeon__inner { padding-block: 128px; }
+  .surgeon__grid { grid-template-columns: repeat(2, 1fr); gap: 64px; }
+  .portrait__stat { left: -32px; }
+  .kpis { grid-template-columns: repeat(4, 1fr); }
+  .kpi { padding: 32px; }
+}
+
+/* ==========================================================================
+   5. PROCEDIMIENTOS
+   ========================================================================== */
+.bg-layer--procedures { --bg-opacity: 0.85; background-image: url("../images/doctor-carlos-gomez-cirugia-bariatrica-manga-gastrica-en-guayaquil.jpg"); }
+
+.procs { display: grid; grid-template-columns: 1fr; gap: 24px; }
+.proc { display: flex; flex-direction: column; justify-content: space-between; }
+.proc__media { position: relative; height: 224px; overflow: hidden; border-bottom: 1px solid var(--hairline); }
+.proc__media img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.95); transition: transform 0.7s; }
+.proc:hover .proc__media img { transform: scale(1.05); }
+.proc__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, var(--obsidian), transparent); }
+.proc__body { padding: 28px; }
+.proc__tag { display: block; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
+.proc__name { margin: 4px 0 12px; font-family: var(--font-serif); font-size: 30px; line-height: 36px; color: var(--alabaster); }
+.proc__text { font-weight: 300; color: var(--stone); }
+.proc__text strong { font-weight: 400; color: var(--alabaster); }
+.proc__footer { padding: 8px 28px 28px; }
+
+.btn-quote {
+  display: block; width: 100%; padding: 14px; text-align: center;
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--alabaster);
+  background: rgba(9, 10, 12, 0.55);
+  border: 1px solid rgba(197, 177, 145, 0.32);
+  transition: all 0.35s var(--ease);
+}
+.proc:hover .btn-quote { border-color: var(--gold); background: rgba(197, 177, 145, 0.14); }
+.btn-quote:hover { background: var(--gold) !important; color: var(--obsidian) !important; font-weight: 600; }
+
+@media (min-width: 768px) { .procs { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .procs { grid-template-columns: repeat(4, 1fr); } }
+
+/* ==========================================================================
+   6. CASOS Y TESTIMONIOS EN VIDEO
+   ========================================================================== */
+.bg-layer--cases { --bg-opacity: 0.9; background-image: url("../images/banner-doctor-carlos-gomez-cirujano-bariatrico-pacientes-estados-unidos-y-ecuador.jpg"); }
+
+.cases { display: flex; flex-direction: column; gap: 48px; }
+.case { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: center; padding-top: 40px; border-top: 1px solid var(--hairline); }
+.case__info { display: flex; flex-direction: column; gap: 8px; }
+.case__num { font-family: var(--font-serif); font-size: 60px; line-height: 60px; color: var(--gold-muted); }
+.case__name { font-family: var(--font-serif); font-size: 30px; line-height: 36px; color: var(--alabaster); }
+.case__proc { letter-spacing: 0.6px; text-transform: uppercase; color: var(--stone); }
+.case__videos { display: grid; grid-template-columns: 1fr; gap: 24px; }
+@media (min-width: 640px) { .case__videos { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) {
+  .case { grid-template-columns: repeat(12, 1fr); }
+  .case__info { grid-column: span 3; }
+  .case__videos { grid-column: span 9; }
+}
+
+/* Miniatura de video: abre el modal de YouTube */
+.video-thumb {
+  position: relative; display: block; width: 100%; overflow: hidden; text-align: left;
+  background: var(--obsidian); border: 1px solid var(--hairline); transition: border-color 0.3s;
+}
+.video-thumb:hover { border-color: var(--gold); }
+.video-thumb--case { height: 253.69px; }
+.video-thumb--story { aspect-ratio: 394.66 / 221.98; margin-bottom: 16px; }
+.video-thumb img.video-thumb__cover { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: transform 0.5s; }
+.video-thumb:hover .video-thumb__cover { transform: scale(1.05); }
+.video-thumb::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(9, 10, 12, 0.9), rgba(9, 10, 12, 0.2), transparent); pointer-events: none; }
+.video-thumb__play {
+  position: absolute; inset: 0; z-index: 1; margin: auto;
+  display: flex; align-items: center; justify-content: center; padding-left: 4px;
+  width: 64px; height: 64px; border-radius: 50%;
+  background: rgba(9, 10, 12, 0.4); border: 1px solid var(--gold);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s;
+}
+.video-thumb--story .video-thumb__play { width: 48px; height: 48px; }
+.video-thumb:hover .video-thumb__play { background: rgba(197, 177, 145, 0.25); transform: scale(1.1); }
+.video-thumb__play img { width: 20px; height: 20px; }
+.video-thumb--story .video-thumb__play img { width: 16px; height: 16px; }
+.video-thumb__label { position: absolute; left: 16px; bottom: 16px; z-index: 1; font-size: 10.9px; line-height: 16.32px; letter-spacing: 3.482px; text-transform: uppercase; color: var(--gold); }
+
+.stories { display: flex; flex-direction: column; gap: 32px; padding-top: 32px; }
+.stories__title { font-family: var(--font-serif); font-size: 36px; line-height: 40px; color: var(--alabaster); }
+.stories__title em { font-style: italic; color: var(--gold); }
+.stories__grid { display: grid; grid-template-columns: 1fr; gap: 32px 24px; }
+.story__name { font-family: var(--font-serif); font-size: 20px; line-height: 28px; color: var(--alabaster); }
+.story__note { font-style: italic; color: var(--stone); }
+@media (min-width: 640px) { .stories__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .stories { padding-top: 48px; } .stories__grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* ==========================================================================
+   7. PROCESO (10 pasos + foto fija a la derecha)
+   ========================================================================== */
+.process__bg { position: absolute; inset: 0; pointer-events: none; opacity: 0.1; background: url("../images/doctor-carlos-gomez-cirugia-bariatrica-manga-gastrica-en-guayaquil.jpg") center / cover; }
+.process__veil { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, var(--obsidian), rgba(9, 10, 12, 0.9), var(--obsidian)); }
+.process__anchor { position: absolute; top: -96px; pointer-events: none; }
+.process { position: relative; z-index: 10; display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; }
+.process__steps { display: flex; flex-direction: column; gap: 16px; }
+.process__intro { display: flex; flex-direction: column; gap: 16px; padding-bottom: 12px; }
+.process__intro .title { font-size: 36px; line-height: 1.08; }
+.process__intro .lead { padding-top: 0; }
+.process__quick { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding-top: 4px; }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px;
+  font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;
+  transition: all 0.3s; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+.chip .icon { width: 14px; height: 14px; }
+.chip--gold { font-weight: 600; color: var(--obsidian); background: var(--gold); border: 1px solid var(--gold); }
+.chip--gold:hover { background: var(--gold-light); }
+.chip--ghost { font-weight: 500; color: var(--gold); background: rgba(9, 10, 12, 0.8); border: 1px solid var(--gold-muted); }
+.chip--ghost:hover { color: var(--alabaster); border-color: var(--gold); background: rgba(197, 177, 145, 0.12); }
+.chip--ghost .icon, .chip--gold .icon { fill: currentColor; }
+
+/* Tarjeta de paso: apagada al 50 %, se ilumina al pasar el mouse o al ser el paso activo */
+.step { padding: 20px; cursor: pointer; opacity: 0.5; outline: none; transition: opacity 0.4s ease, transform 0.45s var(--ease), border-color 0.45s var(--ease), box-shadow 0.45s var(--ease), background 0.45s ease; }
+.step__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.step__id { display: flex; align-items: center; gap: 14px; }
+.step__num { font-family: var(--font-serif); font-size: 30px; line-height: 1; color: var(--stone); user-select: none; transition: transform 0.4s var(--ease), color 0.4s ease, text-shadow 0.4s ease; }
+.step__rule { width: 1px; height: 24px; background: rgba(210, 194, 168, 0.2); }
+.step__badge {
+  padding: 2px 10px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--stone); background: rgba(9, 10, 12, 0.7); border: 1px solid rgba(210, 194, 168, 0.2);
+  transition: border-color 0.4s ease, color 0.4s ease, background-color 0.4s ease;
+}
+.step__dot { width: 10px; height: 10px; margin-top: 4px; flex-shrink: 0; border-radius: 50%; transition: background-color 0.4s ease, box-shadow 0.4s ease; }
+.step__title { margin-top: 12px; font-family: var(--font-serif); font-size: 20px; line-height: 1.33; color: var(--alabaster); transition: color 0.2s; }
+.step__text { margin-top: 6px; font-weight: 300; color: var(--stone); }
+.step__preview { position: relative; margin-top: 12px; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid rgba(210, 194, 168, 0.25); }
+.step__preview img { width: 100%; height: 100%; object-fit: cover; }
+.step__preview .chip-mini { position: absolute; right: 8px; bottom: 8px; }
+@media (min-width: 640px) {
+  .step { padding: 24px; }
+  .step__num { font-size: 36px; }
+  .step__title { font-size: 24px; }
+}
+@media (min-width: 1024px) { .step__preview { display: none; } }
+
+.chip-mini {
+  display: flex; align-items: center; gap: 4px; padding: 4px 10px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--gold); background: rgba(9, 10, 12, 0.8); border: 1px solid rgba(197, 177, 145, 0.5);
+}
+.chip-mini .icon { width: 12px; height: 12px; }
+
+.step:hover, .step:focus-visible {
+  opacity: 1; transform: translateY(-5px); border-color: var(--gold);
+  box-shadow: 0 22px 48px -12px rgba(0, 0, 0, 0.85), 0 0 25px -4px rgba(197, 177, 145, 0.25);
+  background: linear-gradient(165deg, rgba(24, 27, 34, 0.95) 0%, rgba(13, 15, 19, 0.98) 100%);
+}
+.step:hover .step__title { color: var(--gold); }
+.step:hover .step__num, .step:focus-visible .step__num { transform: translateX(4px) scale(1.05); color: #e2d1b5; text-shadow: 0 0 18px rgba(197, 177, 145, 0.35); }
+.step:hover .step__badge, .step:focus-visible .step__badge { color: var(--alabaster); border-color: rgba(197, 177, 145, 0.65); background-color: rgba(197, 177, 145, 0.12); }
+
+.step.is-active {
+  opacity: 1; transform: translateY(-3px); border-color: var(--gold);
+  box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.9), 0 0 30px -4px rgba(197, 177, 145, 0.32);
+  background: linear-gradient(165deg, rgba(28, 32, 40, 0.96) 0%, rgba(14, 16, 20, 0.99) 100%);
+}
+.step.is-active::after { transform: scaleX(1); }
+.step.is-active .step__num { color: var(--gold); text-shadow: 0 0 16px rgba(197, 177, 145, 0.4); transform: scale(1.05); }
+.step.is-active .step__badge { color: var(--gold); border-color: rgba(197, 177, 145, 0.6); background-color: rgba(197, 177, 145, 0.12); }
+.step.is-active .step__dot { background-color: var(--gold); box-shadow: 0 0 10px var(--gold); }
+
+/* Marco fijo con la foto del paso activo (solo escritorio) */
+.stage { display: none; flex-direction: column; gap: 16px; }
+.stage__card { position: relative; overflow: hidden; background: var(--onyx); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
+.stage__photo { position: relative; width: 100%; height: 620px; overflow: hidden; background: var(--obsidian); }
+.stage__photo > img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s; }
+.stage__photo::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to top, var(--obsidian), rgba(9, 10, 12, 0.3), transparent); }
+.stage__tag { position: absolute; top: 20px; z-index: 10; padding: 6px 14px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; background: rgba(0, 0, 0, 0.7); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.stage__tag--badge { left: 20px; font-size: 10.5px; font-weight: 600; color: var(--gold); }
+.stage__tag--count { right: 20px; font-size: 12px; color: var(--alabaster); }
+.stage__caption { position: absolute; inset: auto 0 0; z-index: 10; padding: 24px; background: linear-gradient(to top, var(--obsidian), rgba(9, 10, 12, 0.95), transparent); }
+.stage__title { font-family: var(--font-serif); font-size: 24px; line-height: 1.375; color: var(--alabaster); }
+.stage__note { max-width: 36rem; margin-top: 6px; font-weight: 300; color: var(--stone); }
+.stage__bar { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(210, 194, 168, 0.2); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; }
+.stage__bar-group { display: flex; align-items: center; gap: 16px; }
+.stage__link { display: inline-flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gold); transition: color 0.2s; }
+.stage__link:hover { color: var(--alabaster); }
+.stage__link--muted { gap: 6px; color: var(--stone); }
+.stage__link--muted:hover { color: var(--gold); }
+.stage__link .icon { width: 14px; height: 14px; }
+.stage__link--play .icon { fill: currentColor; }
+.assurance { display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: rgba(9, 10, 12, 0.4); }
+.assurance__icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 32px; height: 32px; margin-top: 2px; border-radius: 50%; color: var(--gold); background: rgba(197, 177, 145, 0.08); }
+.assurance__title { display: block; font-size: 12px; font-weight: 500; color: var(--alabaster); }
+.assurance p { margin-top: 2px; font-weight: 300; color: var(--stone); }
+
+@media (min-width: 1024px) {
+  .process { grid-template-columns: repeat(12, 1fr); gap: 48px; }
+  .process__steps { grid-column: span 5; }
+  .process__intro .title { font-size: 48px; }
+  .stage { display: flex; position: sticky; top: 115px; grid-column: span 7; }
+}
+
+/* ==========================================================================
+   8. CALCULADORA (llamada a la acción)
+   ========================================================================== */
+.bg-layer--calculator { --bg-opacity: 0.6; background-image: url("../images/cirugia-en-contra-del-sobrepeso-y-diabetes-en-guayaquil-bypass-gastrico.jpg"); }
+.cta-calc { display: flex; align-items: center; justify-content: center; min-height: 760px; padding-block: 320px; text-align: center; }
+.cta-calc__inner { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; max-width: 56rem; margin-inline: auto; padding-inline: var(--gutter); }
+.cta-calc__eyebrow { display: block; margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); }
+.cta-calc__title { max-width: 48rem; margin-bottom: 16px; font-family: var(--font-serif); font-weight: 400; font-size: 30px; line-height: 1.2; color: var(--alabaster); }
+.cta-calc__title em { font-style: italic; color: var(--gold); }
+.cta-calc__text { max-width: 42rem; margin-bottom: 32px; font-weight: 300; color: var(--stone); }
+.cta-calc__actions { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; width: 100%; max-width: 28rem; }
+.cta-calc__actions .btn { width: 100%; }
+.cta-calc__note { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 32px; font-size: 12px; letter-spacing: 0.05em; color: var(--stone); }
+.cta-calc__note::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #10b981; }
+@media (min-width: 640px) {
+  .cta-calc__eyebrow { font-size: 14px; }
+  .cta-calc__title { font-size: 36px; }
+  .cta-calc__actions { flex-direction: row; gap: 20px; max-width: none; }
+  .cta-calc__actions .btn { width: auto; }
+}
+@media (min-width: 1024px) { .cta-calc { min-height: 840px; } .cta-calc__title { font-size: 48px; } }
+
+/* ==========================================================================
+   9. EXCELENCIA · 10 razones
+   ========================================================================== */
+.bg-layer--reasons { --bg-opacity: 0.18; background-image: url("../images/dr-carlos-gomez-suite-hospitalaria-principal.jpg"); }
+.reasons-head { display: flex; flex-direction: column; justify-content: space-between; gap: 24px; }
+.reasons-head .section-head { max-width: 768px; }
+.reasons-head p { max-width: 28rem; font-weight: 300; color: var(--stone); }
+.reasons { display: grid; grid-template-columns: 1fr; gap: 20px; }
+.reason { display: flex; flex-direction: column; justify-content: space-between; padding: 28px; }
+.reason--wide { padding: 32px; border-top: 2px solid var(--gold); }
+.reason--closing { border-color: rgba(197, 177, 145, 0.35); }
+.reason__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.reason__num { font-family: var(--font-serif); font-style: italic; font-size: 36px; line-height: 40px; color: var(--gold); transition: transform 0.4s var(--ease), color 0.4s ease, text-shadow 0.4s ease; }
+.reason--wide .reason__num { font-size: 48px; line-height: 1; }
+.reason:hover .reason__num { transform: translateX(4px) scale(1.05); color: #e2d1b5; text-shadow: 0 0 18px rgba(197, 177, 145, 0.35); }
+.reason__badge { padding: 4px 12px; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--stone); border: 1px solid rgba(197, 177, 145, 0.25); transition: border-color 0.4s ease, color 0.4s ease, background-color 0.4s ease; }
+.reason:hover .reason__badge { color: var(--alabaster); border-color: rgba(197, 177, 145, 0.65); background-color: rgba(197, 177, 145, 0.12); }
+.reason__body { margin-top: 24px; }
+.reason__title { margin-bottom: 8px; font-family: var(--font-serif); font-size: 24px; line-height: 32px; color: var(--alabaster); }
+.reason--wide .reason__title { font-size: 30px; line-height: 36px; }
+.reason__text { font-weight: 300; color: var(--stone); }
+.reason--closing .reason__text { color: rgba(244, 241, 233, 0.9); }
+.reasons-cta { display: flex; justify-content: center; padding-top: 16px; }
+.reasons-cta .btn { padding: 16px 40px; height: auto; gap: 12px; font-weight: 600; letter-spacing: 0.16em; }
+@media (min-width: 768px) { .reasons { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) {
+  .reasons-head { flex-direction: row; align-items: flex-end; }
+  .reasons { grid-template-columns: repeat(12, 1fr); }
+  .reason { grid-column: span 3; }
+  .reason--wide { grid-column: span 6; }
+}
+
+/* ==========================================================================
+   10. FINANCIAMIENTO
+   ========================================================================== */
+.plans { display: grid; grid-template-columns: 1fr; gap: 24px; }
+.plan { display: flex; flex-direction: column; justify-content: space-between; padding: 32px; }
+.plan__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.plan__num { font-family: var(--font-serif); font-style: italic; font-size: 36px; line-height: 40px; color: var(--gold); transition: transform 0.4s var(--ease), color 0.4s ease, text-shadow 0.4s ease; }
+.plan:hover .plan__num { transform: translateX(4px) scale(1.05); color: #e2d1b5; text-shadow: 0 0 18px rgba(197, 177, 145, 0.35); }
+.plan__icon { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; color: var(--gold); background: rgba(197, 177, 145, 0.08); border: 1px solid rgba(197, 177, 145, 0.2); }
+.plan__icon .icon { width: 20px; height: 20px; stroke-width: 1.8; }
+.plan__title { margin-bottom: 12px; font-family: var(--font-serif); font-size: 24px; line-height: 32px; color: var(--alabaster); }
+.plan__text { font-weight: 300; color: var(--stone); }
+.plan__text strong { font-weight: 400; color: var(--alabaster); }
+.plan__benefit { display: flex; align-items: center; gap: 8px; margin-top: 24px; padding-top: 24px; font-size: 12px; font-weight: 500; letter-spacing: 0.025em; color: var(--gold); border-top: 1px solid rgba(210, 194, 168, 0.12); }
+.plan__benefit .icon { width: 14px; height: 14px; }
+
+.callout { display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 24px; padding: 24px; background: rgba(9, 10, 12, 0.8); border: 1px solid var(--hairline-strong); }
+.callout__text { text-align: center; }
+.callout__title { font-family: var(--font-serif); font-size: 20px; line-height: 28px; color: var(--alabaster); }
+.callout__text p { margin-top: 4px; font-weight: 300; color: var(--stone); }
+.callout .btn { flex-shrink: 0; }
+@media (min-width: 640px) {
+  .callout { flex-direction: row; padding: 32px; }
+  .callout__text { text-align: left; }
+  .callout__title { font-size: 24px; line-height: 32px; }
+}
+@media (min-width: 768px) { .plans { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1024px) { .plans { gap: 32px; } }
+
+/* ==========================================================================
+   11. PREGUNTAS FRECUENTES
+   ========================================================================== */
+.section.faq-section { padding-block: 0; }
+.faq { max-width: 896px; margin-inline: auto; padding-block: 96px; display: flex; flex-direction: column; align-items: center; gap: 64px; }
+.faq__list { width: 100%; max-width: 848px; border-top: 1px solid var(--hairline); }
+.faq-item { border-bottom: 1px solid var(--hairline); }
+.faq-item summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 24px; list-style: none; cursor: pointer; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item__q { font-family: var(--font-serif); font-size: 22px; line-height: 32px; color: var(--alabaster); transition: color 0.2s; }
+.faq-item summary:hover .faq-item__q { color: var(--gold); }
+.faq-item__icon { position: relative; flex-shrink: 0; width: 14px; height: 14px; }
+.faq-item__icon img { position: absolute; inset: 0; width: 14px; height: 14px; transition: opacity 0.3s ease, transform 0.4s var(--ease); }
+.faq-item__icon .icon-open { opacity: 0; transform: rotate(-90deg) scale(0.75); }
+.faq-item__icon .icon-closed { opacity: 1; }
+.faq-item.is-expanded .icon-open { opacity: 1; transform: none; }
+.faq-item.is-expanded .icon-closed { opacity: 0; transform: rotate(90deg) scale(0.75); }
+.faq-item__content { overflow: hidden; transition: height 0.42s var(--ease), opacity 0.35s ease; will-change: height, opacity; }
+.faq-item__answer { padding-bottom: 24px; font-weight: 300; line-height: 1.65; color: var(--stone); }
+.faq-item__link { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 12px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--gold); }
+.faq-item__link:hover { text-decoration: underline; }
+@media (min-width: 640px) { .faq-item__q { font-size: 24px; } }
+@media (min-width: 1024px) { .faq { padding-block: 128px; } }
+
+/* ==========================================================================
+   12. CITA PRIVADA + PIE (se revela debajo del contenido en escritorio)
+   ========================================================================== */
+.cita-spacer { display: none; width: 100%; pointer-events: none; user-select: none; }
+.cita { position: relative; display: flex; flex-direction: column; justify-content: space-between; width: 100%; overflow: hidden; background: var(--onyx); }
+.cita__bg { position: absolute; inset: 0; pointer-events: none; background: url("../images/dr-carlos-gomez-cirujano-bariatrico-ubicacion-sector-mall-del-sol.jpg") center / cover no-repeat; transition: transform 0.3s; will-change: transform; }
+.cita__shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, rgba(9, 10, 12, 0.85), rgba(9, 10, 12, 0.55), var(--obsidian)); }
+.cita__vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at center, transparent 0%, var(--obsidian) 90%); }
+.cita__main { position: relative; z-index: 10; flex: 1; display: flex; align-items: center; padding-block: 72px; will-change: transform; }
+.cita__grid { display: grid; grid-template-columns: 1fr; gap: 36px; align-items: center; width: 100%; }
+.cita__info { display: flex; flex-direction: column; gap: 20px; }
+.cita__title { font-family: var(--font-serif); font-weight: 400; font-size: 38px; line-height: 1.05; color: var(--alabaster); }
+.cita__title em { font-style: italic; color: var(--gold); }
+.contact-list { display: flex; flex-direction: column; gap: 20px; padding-top: 8px; }
+.contact { display: flex; align-items: flex-start; gap: 16px; }
+.contact > img { width: 20px; height: 20px; margin-top: 4px; flex-shrink: 0; }
+.contact__label { display: block; font-size: 10.9px; line-height: 16.32px; letter-spacing: 3.482px; text-transform: uppercase; color: var(--stone); }
+.contact__value { font-family: var(--font-serif); font-size: 24px; line-height: 30px; color: var(--alabaster); transition: color 0.2s; }
+a.contact__value:hover { color: var(--gold); }
+.contact__address { font-weight: 300; color: var(--alabaster); }
+
+.form-card { padding: 24px; background: rgba(23, 25, 30, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--hairline); }
+.form { display: flex; flex-direction: column; gap: 16px; }
+.form__row { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.form__submit { width: 100%; padding: 14px 28px; font-size: 11.5px; font-weight: 500; line-height: 16px; letter-spacing: 3px; text-transform: uppercase; text-align: center; color: var(--obsidian); background: var(--gold); transition: background 0.2s; }
+.form__submit:hover { background: var(--gold-light); }
+.form-success { flex-direction: column; align-items: flex-start; gap: 12px; padding: 24px; color: var(--alabaster); background: rgba(63, 121, 100, 0.1); border: 1px solid var(--viridian); }
+.form-success:not([hidden]) { display: flex; }
+.form-success__title { font-family: var(--font-serif); font-size: 24px; color: var(--gold); }
+.form-success p { color: var(--stone); }
+
+.footer { position: relative; z-index: 10; width: 100%; padding: 18px var(--gutter); background: rgba(9, 10, 12, 0.9); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border-top: 1px solid var(--hairline); }
+.footer__inner { display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 8px; max-width: var(--container); margin-inline: auto; }
+.footer__brand { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; }
+.footer__name { font-family: var(--font-serif); font-size: 16px; line-height: 16px; letter-spacing: 2.16px; color: var(--alabaster); }
+.footer__tag { font-size: 8.8px; line-height: 13.2px; letter-spacing: 2.64px; text-transform: uppercase; color: var(--gold); }
+.footer__legal { font-size: 11.5px; line-height: 16px; color: var(--stone); }
+
+@media (min-width: 640px) {
+  .cita__title { font-size: 48px; }
+  .form-card { padding: 32px; }
+  .form__row { grid-template-columns: repeat(2, 1fr); }
+  .footer__inner { flex-direction: row; align-items: center; }
+}
+@media (min-width: 1024px) {
+  .cita-spacer { display: block; height: 100vh; }
+  .cita { position: fixed; z-index: 10; inset: auto 0 0 0; height: 100vh; }
+  .cita__main { padding-block: 76px 16px; }
+  .cita__grid { grid-template-columns: repeat(12, 1fr); gap: 56px; }
+  .cita__info { grid-column: span 5; }
+  .form-card { grid-column: span 7; }
+}
+@media (min-width: 1280px) {
+  .cita__title { font-size: 56px; }
+  .form-card { padding: 38px; }
+  .form { gap: 18px; }
+  .form__row { gap: 20px; }
+}
+
+/* Botón flotante de WhatsApp */
+.fab {
+  position: fixed; right: 24px; bottom: 24px; z-index: 50;
+  display: flex; align-items: center; justify-content: center;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--onyx); border: 1px solid var(--gold);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s;
+}
+.fab:hover { transform: scale(1.1); }
+.fab img { width: 24px; height: 24px; }
