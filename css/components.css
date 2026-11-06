@@ -323,7 +323,7 @@
 .process__bg { position: absolute; inset: 0; pointer-events: none; opacity: 0.1; background: url("../images/doctor-carlos-gomez-cirugia-bariatrica-manga-gastrica-en-guayaquil.jpg") center / cover; }
 .process__veil { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, var(--obsidian), rgba(9, 10, 12, 0.9), var(--obsidian)); }
 .process__anchor { position: absolute; top: -96px; pointer-events: none; }
-.process { position: relative; z-index: 10; display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; }
+.process { position: relative; z-index: 10; padding-block: var(--section-pad); display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; }
 .process__steps { display: flex; flex-direction: column; gap: 16px; }
 .process__intro { display: flex; flex-direction: column; gap: 16px; padding-bottom: 12px; }
 .process__intro .title { font-size: 36px; line-height: 1.08; }
@@ -428,8 +428,8 @@
    8. CALCULADORA (llamada a la acción)
    ========================================================================== */
 .bg-layer--calculator { --bg-opacity: 0.6; background-image: url("../images/cirugia-en-contra-del-sobrepeso-y-diabetes-en-guayaquil-bypass-gastrico.jpg"); }
-.cta-calc { display: flex; align-items: center; justify-content: center; min-height: 520px; padding-block: 96px; text-align: center; }
-.cta-calc__inner { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; max-width: 56rem; margin-inline: auto; padding-inline: var(--gutter); }
+.cta-calc { text-align: center; }
+.cta-calc__inner { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 520px; padding-block: 96px; max-width: 56rem; margin-inline: auto; padding-inline: var(--gutter); }
 .cta-calc__eyebrow { display: block; margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); }
 .cta-calc__title { max-width: 48rem; margin-bottom: 16px; font-family: var(--font-serif); font-weight: 400; font-size: 30px; line-height: 1.2; color: var(--alabaster); }
 .cta-calc__title em { font-style: italic; color: var(--gold); }
@@ -444,7 +444,7 @@
   .cta-calc__actions { flex-direction: row; gap: 20px; max-width: none; }
   .cta-calc__actions .btn { width: auto; }
 }
-@media (min-width: 1024px) { .cta-calc { min-height: 600px; } .cta-calc__title { font-size: 48px; } }
+@media (min-width: 1024px) { .cta-calc__inner { min-height: 600px; } .cta-calc__title { font-size: 48px; } }
 
 /* ==========================================================================
    9. EXCELENCIA · 10 razones
@@ -510,7 +510,6 @@
 /* ==========================================================================
    11. PREGUNTAS FRECUENTES
    ========================================================================== */
-.section.faq-section { padding-block: 0; }
 .faq { max-width: 896px; margin-inline: auto; padding-block: 72px; display: flex; flex-direction: column; align-items: center; gap: 64px; }
 .faq__list { width: 100%; max-width: 848px; border-top: 1px solid var(--hairline); }
 .faq-item { border-bottom: 1px solid var(--hairline); }

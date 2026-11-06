@@ -29,11 +29,15 @@
   /* Layout */
   --container: 1280px;
   --gutter: 16px;
+  --section-pad: 72px; /* relleno vertical de cada sección */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (min-width: 640px) {
   :root { --gutter: 24px; }
+}
+@media (min-width: 1024px) {
+  :root { --section-pad: 96px; }
 }
 
 /* ---------- 2. RESET ---------- */
@@ -88,13 +92,20 @@ p { font-size: 17px; line-height: 1.65; }
   position: relative;
   width: 100%;
   overflow: hidden;
-  border-top: 1px solid var(--hairline);
-  padding-block: 72px;
+  overflow: clip; /* recorta exacto al píxel y no impide position: sticky (ver .bg-layer) */
+}
+/* Línea divisoria superior: va como pseudo-elemento sobre el velo. Con border-top quedaba fuera del velo
+   y dejaba ver 1 px de la imagen de fondo fija sin oscurecer. */
+.section::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; z-index: 20;
+  height: 1px;
+  background: var(--hairline);
+  pointer-events: none;
 }
 .section--obsidian { background: var(--obsidian); }
 /* Las secciones onyx nacen y terminan en obsidian, para que no haya un salto de color entre secciones */
 .section--onyx { background: linear-gradient(to bottom, var(--obsidian), var(--onyx) 160px, var(--onyx) calc(100% - 160px), var(--obsidian)); }
-.section--clip { clip-path: inset(0); }
 .section--visible { overflow: visible; } /* necesario para position: sticky dentro de la sección */
 .section--ambient {
   background-image:
@@ -102,14 +113,12 @@ p { font-size: 17px; line-height: 1.65; }
     radial-gradient(circle at 15% 85%, rgba(63, 121, 100, 0.06) 0%, rgba(9, 10, 12, 0) 45%);
   background-attachment: fixed;
 }
-@media (min-width: 1024px) {
-  .section { padding-block: 96px; }
-}
 
 /* Contenido de sección: apila bloques con separación amplia */
 .section__inner {
   position: relative;
   z-index: 10;
+  padding-block: var(--section-pad); /* el relleno va aquí y no en <section>, para que .bg-layer cubra toda la sección */
   display: flex;
   flex-direction: column;
   gap: 64px;
@@ -158,12 +167,15 @@ p { font-size: 17px; line-height: 1.65; }
   color: var(--stone);
 }
 
-/* Capa de fondo fijo (efecto parallax) detrás de una sección.
-   Cada sección define su imagen y opacidad en components.css */
+/* Capa de fondo "fijo" (efecto parallax) detrás de una sección: pegajosa (sticky) al viewport mientras la
+   sección pasa. Va dentro de la sección, así el recorte es exacto y no se escapa un píxel de imagen en los bordes.
+   Cada sección define su imagen y opacidad en components.css. */
 .bg-layer {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  margin-bottom: -100vh; /* no ocupa espacio: el contenido va encima */
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
