@@ -92,7 +92,8 @@ p { font-size: 17px; line-height: 1.65; }
   padding-block: 72px;
 }
 .section--obsidian { background: var(--obsidian); }
-.section--onyx { background: var(--onyx); }
+/* Las secciones onyx nacen y terminan en obsidian, para que no haya un salto de color entre secciones */
+.section--onyx { background: linear-gradient(to bottom, var(--obsidian), var(--onyx) 160px, var(--onyx) calc(100% - 160px), var(--obsidian)); }
 .section--clip { clip-path: inset(0); }
 .section--visible { overflow: visible; } /* necesario para position: sticky dentro de la sección */
 .section--ambient {
@@ -176,7 +177,7 @@ p { font-size: 17px; line-height: 1.65; }
 /* Velo degradado que funde el fondo con el color de la sección */
 .veil { position: absolute; inset: 0; pointer-events: none; }
 .veil--obsidian { background: linear-gradient(to bottom, var(--obsidian), rgba(9, 10, 12, 0.75), var(--obsidian)); }
-.veil--onyx { background: linear-gradient(to bottom, var(--onyx), rgba(17, 19, 22, 0.75), var(--onyx)); }
+.veil--onyx { background: linear-gradient(to bottom, var(--obsidian) 0, rgba(17, 19, 22, 0.75) 30%, rgba(17, 19, 22, 0.75) 70%, var(--obsidian) 100%); }
 
 /* ---------- 4. BOTONES ---------- */
 .btn {
