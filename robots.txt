@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://www.drcarlosgomez.doc.ec/el-cirujano-que-cambia-vidas/sitemap.xml

@@ -94,10 +94,10 @@
       fetch(WEBHOOK, { method: 'POST', body: datos, signal: corte.signal })
         .then(function (r) {
           return r.json().catch(function () { return {}; }).then(function (j) {
-            return { ok: r.ok && j.ok === true, motivo: j.motivo };
+            return { ok: r.ok && j.ok === true, motivo: j.motivo, status: r.status };
           });
         })
-        .catch(function () { return { ok: false }; })
+        .catch(function () { return { ok: false, red: true }; }) // sin conexión, CORS o tiempo agotado
         .then(function (res) {
           clearTimeout(reloj);
           enviando = false;
@@ -109,13 +109,18 @@
             exito.hidden = false;
             return;
           }
+          // Se avisa a GTM para detectar formularios que fallan sin que nadie lo note
+          if (window.drgTrack) window.drgTrack('lead_error', { form_id: idForm, status: res.status || 0, motivo: res.motivo || (res.red ? 'red' : 'desconocido') });
           var mensajes = {
             telefono: 'Revisa tu número de WhatsApp: parece incompleto.',
             nombre: 'Escribe tu nombre, por favor.',
+            email: 'Revisa tu correo electrónico: parece incompleto.',
             consentimiento: 'Para enviar tus datos necesitamos que aceptes la política de privacidad.'
           };
-          estado.innerHTML = mensajes[res.motivo] ||
-            'No pudimos enviar tu solicitud. <a href="' + WHATSAPP + '" target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp</a> y te atendemos de inmediato.';
+          var enlace = '<a href="' + WHATSAPP + '" target="_blank" rel="noopener noreferrer">escríbenos por WhatsApp</a> y te atendemos de inmediato.';
+          estado.innerHTML = mensajes[res.motivo] || (res.red
+            ? 'No pudimos conectar. Revisa tu conexión o ' + enlace
+            : 'No pudimos enviar tu solicitud. Intenta de nuevo o ' + enlace);
           estado.hidden = false;
         });
     });

@@ -125,7 +125,9 @@ Error (formularios):        #f87171
 ## Conversión
 - Conversión principal: [PENDIENTE: valoración vía formulario / WhatsApp]
 - Conversiones secundarias [DEL SITIO]: clic a WhatsApp, cálculo de IMC, envío de formulario "Recibir cotización" y "Contáctanos".
-- Destino de leads: n8n → CRM Kommo [DEL SITIO].
+- Destino de leads: n8n → CRM Kommo [DEL SITIO]. Webhook `https://n8n.agenciasm.marketing/webhook/landing-lead-drgomez`; solo acepta peticiones del origen `https://www.drcarlosgomez.doc.ec`, por eso en local el formulario muestra error aunque el código esté bien.
+- **Campos que lee el webhook:** `name`, `tel`, `email`, `consent` (obligatorio) y el honeypot `website`. Si el nombre o el teléfono llegan con otros nombres de campo, el webhook responde `400 {"ok":false,"motivo":"nombre"}`. Ambos formularios (contacto e informe de IMC) usan estos nombres.
+- Pruebas: los envíos de prueba se hacen con el nombre `TEST V2`, correo `info@triaris.com` y un teléfono ficticio; hay que borrarlos de Kommo después.
 - Meta de leads/mes y CPL objetivo: [PENDIENTE]
 
 ---
@@ -156,7 +158,7 @@ Error (formularios):        #f87171
 | Google Tag Manager | GTM-TVL2KNGP |
 | GA4 | G-0PYMD6LKVR |
 | Meta Pixel / CAPI | 1384318510353602 |
-| Google Ads (conversión) | [PENDIENTE] |
+| Google Ads (conversión) | AW-18525504851 [leído del contenedor GTM; confirmar etiqueta de conversión] |
 | TikTok Pixel / Events API | [PENDIENTE] |
 | Banner de cookies / consentimiento | Implementado: aviso propio (`#consent-banner`) + Google Consent Mode v2 en `js/tracking.js`. Decisión guardada en `localStorage` (`drg_consent`). |
 
@@ -167,7 +169,7 @@ Error (formularios):        #f87171
 - El mismo `event_id` de `generate_lead` se envía al webhook de n8n para deduplicar con la API de conversiones (CAPI).
 - Se conservan `utm_*`, `fbclid`, `gclid` y `ttclid` durante la sesión y viajan con el formulario.
 
-> Revisar: en esta tabla GA4 y Meta Pixel comparten el mismo número. Un ID de GA4 empieza por `G-`, así que uno de los dos es incorrecto.
+El contenedor GTM (revisado en nov 2026) usa Google Tag (GA4), Google Ads, Conversion Linker y la plantilla de Meta Pixel. No tiene TikTok, HTML personalizado ni JavaScript personalizado.
 
 Los tokens y secretos de CAPI **no se guardan en el repositorio**: variables de entorno en el servidor/n8n.
 
