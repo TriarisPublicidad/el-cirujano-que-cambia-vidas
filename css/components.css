@@ -127,7 +127,7 @@
   .hero__title { font-size: 70px; }
 }
 
-/* Hero móvil: composición propia, con el doctor centrado (images/hero-mobile.jpg, recorte 4:5).
+/* Hero móvil: composición propia, con el doctor centrado (images/hero-mobile.webp, recorte 4:5).
    La foto va arriba, se funde con el fondo y el titular queda centrado debajo, superpuesto. */
 @media (max-width: 767px) {
   .hero { padding-top: 0; }
@@ -235,7 +235,7 @@
 /* ==========================================================================
    5. PROCEDIMIENTOS
    ========================================================================== */
-.bg-layer--procedures { --bg-opacity: 0.85; background-image: url("../images/doctor-carlos-gomez-cirugia-bariatrica-manga-gastrica-en-guayaquil.jpg"); }
+.bg-layer--procedures { --bg-opacity: 0.85; background-image: url("../images/doctor-carlos-gomez-cirugia-bariatrica-manga-gastrica-en-guayaquil.webp"); }
 
 .procs { display: grid; grid-template-columns: 1fr; gap: 24px; }
 .proc { display: flex; flex-direction: column; justify-content: space-between; }
@@ -267,7 +267,7 @@
 /* ==========================================================================
    6. CASOS Y TESTIMONIOS EN VIDEO
    ========================================================================== */
-.bg-layer--cases { --bg-opacity: 0.9; background-image: url("../images/banner-doctor-carlos-gomez-cirujano-bariatrico-pacientes-estados-unidos-y-ecuador.jpg"); }
+.bg-layer--cases { --bg-opacity: 0.9; background-image: url("../images/banner-doctor-carlos-gomez-cirujano-bariatrico-pacientes-estados-unidos-y-ecuador.webp"); }
 
 .cases { display: flex; flex-direction: column; gap: 48px; }
 .case { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: center; padding-top: 40px; border-top: 1px solid var(--hairline); }
@@ -320,7 +320,7 @@
 /* ==========================================================================
    7. PROCESO (10 pasos + foto fija a la derecha)
    ========================================================================== */
-.process__bg { position: absolute; inset: 0; pointer-events: none; opacity: 0.1; background: url("../images/doctor-carlos-gomez-cirugia-bariatrica-manga-gastrica-en-guayaquil.jpg") center / cover; }
+.process__bg { position: absolute; inset: 0; pointer-events: none; opacity: 0.1; background: url("../images/doctor-carlos-gomez-cirugia-bariatrica-manga-gastrica-en-guayaquil.webp") center / cover; }
 .process__veil { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, var(--obsidian), rgba(9, 10, 12, 0.9), var(--obsidian)); }
 .process__anchor { position: absolute; top: -96px; pointer-events: none; }
 .process { position: relative; z-index: 10; padding-block: var(--section-pad); display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; }
@@ -427,7 +427,7 @@
 /* ==========================================================================
    8. CALCULADORA (llamada a la acción)
    ========================================================================== */
-.bg-layer--calculator { --bg-opacity: 0.6; background-image: url("../images/cirugia-en-contra-del-sobrepeso-y-diabetes-en-guayaquil-bypass-gastrico.jpg"); }
+.bg-layer--calculator { --bg-opacity: 0.6; background-image: url("../images/cirugia-en-contra-del-sobrepeso-y-diabetes-en-guayaquil-bypass-gastrico.webp"); }
 .cta-calc { text-align: center; }
 .cta-calc__inner { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 520px; padding-block: 96px; max-width: 56rem; margin-inline: auto; padding-inline: var(--gutter); }
 .cta-calc__eyebrow { display: block; margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); }
@@ -449,7 +449,7 @@
 /* ==========================================================================
    9. EXCELENCIA · 10 razones
    ========================================================================== */
-.bg-layer--reasons { --bg-opacity: 0.18; background-image: url("../images/dr-carlos-gomez-suite-hospitalaria-principal.jpg"); }
+.bg-layer--reasons { --bg-opacity: 0.18; background-image: url("../images/dr-carlos-gomez-suite-hospitalaria-principal.webp"); }
 .reasons-head { display: flex; flex-direction: column; justify-content: space-between; gap: 24px; }
 .reasons-head .section-head { max-width: 768px; }
 .reasons-head p { max-width: 28rem; font-weight: 300; color: var(--stone); }
@@ -535,7 +535,7 @@
    ========================================================================== */
 .cita-spacer { display: none; width: 100%; pointer-events: none; user-select: none; }
 .cita { position: relative; display: flex; flex-direction: column; justify-content: space-between; width: 100%; overflow: hidden; background: var(--onyx); }
-.cita__bg { position: absolute; inset: 0; pointer-events: none; background: url("../images/dr-carlos-gomez-cirujano-bariatrico-ubicacion-sector-mall-del-sol.jpg") center / cover no-repeat; transition: transform 0.3s; will-change: transform; }
+.cita__bg { position: absolute; inset: 0; pointer-events: none; background: url("../images/dr-carlos-gomez-cirujano-bariatrico-ubicacion-sector-mall-del-sol.webp") center / cover no-repeat; transition: transform 0.3s; will-change: transform; }
 .cita__shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, rgba(9, 10, 12, 0.85), rgba(9, 10, 12, 0.55), var(--obsidian)); }
 .cita__vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at center, transparent 0%, var(--obsidian) 90%); }
 .cita__main { position: relative; z-index: 10; flex: 1; display: flex; align-items: center; padding-block: 72px; will-change: transform; }
@@ -605,7 +605,7 @@ a.contact__value:hover { color: var(--gold); }
    PÁGINA DE GRACIAS (gracias.html)
    ========================================================================== */
 .thanks { position: relative; display: flex; flex-direction: column; min-height: 100vh; overflow: hidden; background: var(--obsidian); }
-.thanks__bg { position: absolute; inset: 0; pointer-events: none; opacity: 0.12; background: url("../images/doctor-carlos-gomez-cirugia-bariatrica-manga-gastrica-en-guayaquil.jpg") center / cover; }
+.thanks__bg { position: absolute; inset: 0; pointer-events: none; opacity: 0.12; background: url("../images/doctor-carlos-gomez-cirugia-bariatrica-manga-gastrica-en-guayaquil.webp") center / cover; }
 .thanks__veil { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, var(--obsidian), rgba(9, 10, 12, 0.82), var(--obsidian)); }
 .thanks__top { position: relative; z-index: 10; padding-block: 24px; border-bottom: 1px solid var(--hairline); }
 .thanks__top img { width: 160px; }

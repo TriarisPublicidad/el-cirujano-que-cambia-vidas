@@ -41,112 +41,112 @@
   // ==========================================================================
   var facilityItems = [
     {
-      src: 'images/suite-de-paciente-cirugia-bariatrica-y-metabolica-en-clinica-angeles.jpg',
+      src: 'images/suite-de-paciente-cirugia-bariatrica-y-metabolica-en-clinica-angeles.webp',
       category: 'suites',
       title: 'Suite Hospitalaria Tipo Hotel Boutique',
       desc: 'Habitación individual climatizada con cama clínica automatizada, sistema de llamado de enfermería 24/7 y acabados de lujo.',
       badge: 'Suite Principal'
     },
     {
-      src: 'images/quirofano-para-cirugia-baiatrica-dr-carlos-gomez-ecuador.jpg',
+      src: 'images/quirofano-para-cirugia-baiatrica-dr-carlos-gomez-ecuador.webp',
       category: 'quirofano',
       title: 'Quirófano Bariátrico Especializado',
       desc: 'Torres de laparoscopía de ultra alta definición y tecnología de sellado vascular para cirugías seguras y de mínima invasión.',
       badge: 'Quirófano'
     },
     {
-      src: 'images/quirofano-dr-carlos-gomez-guayaquil.jpg',
+      src: 'images/quirofano-dr-carlos-gomez-guayaquil.webp',
       category: 'quirofano',
       title: 'Torres de Monitoreo Anestésico y Quirúrgico',
       desc: 'Estación de anestesiología avanzada, monitoreo hemodinámico y sistemas de soporte vital con flujo laminar estéril.',
       badge: 'Tecnología'
     },
     {
-      src: 'images/suite-de-recuperacion-cirugia-bypass-gastrico-area-familiar.jpg',
+      src: 'images/suite-de-recuperacion-cirugia-bypass-gastrico-area-familiar.webp',
       category: 'suites',
       title: 'Área Familiar Integrada',
       desc: 'Zona de descanso con sofá cama para el acompañante dentro de la suite, garantizando privacidad total para la familia.',
       badge: 'Confort Familiar'
     },
     {
-      src: 'images/suite-de-recuperacion-cirugia-bypass-gastrico-en-guayaquil.jpg',
+      src: 'images/suite-de-recuperacion-cirugia-bypass-gastrico-en-guayaquil.webp',
       category: 'suites',
       title: 'Suite de Recuperación Postoperatoria',
       desc: 'Espacio climatizado con iluminación cálida y confort acústico para un despertar postquirúrgico seguro y placentero.',
       badge: 'Recuperación'
     },
     {
-      src: 'images/suite-de-recuperacion-paciente-dr-carlos-gomez-guayaquil.jpg',
+      src: 'images/suite-de-recuperacion-paciente-dr-carlos-gomez-guayaquil.webp',
       category: 'suites',
       title: 'Habitación del Paciente con Asistencia Médica',
       desc: 'Atención personalizada las 24 horas del día por parte del equipo de enfermería especializada en pacientes bariátricos.',
       badge: 'Cuidados 24/7'
     },
     {
-      src: 'images/suite-de-recuperacion-cirugia-bypass-gastrico-en-ecuador.jpg',
+      src: 'images/suite-de-recuperacion-cirugia-bypass-gastrico-en-ecuador.webp',
       category: 'suites',
       title: 'Vista Panorámica y Luz Natural',
       desc: 'Amplios ventanales con vista exterior que favorecen el bienestar emocional y la recuperación rápida del paciente.',
       badge: 'Bienestar'
     },
     {
-      src: 'images/suite-de-recuperacionbano-completo-cirugia-bypass-gastrico-en-ecuador.jpg',
+      src: 'images/suite-de-recuperacionbano-completo-cirugia-bypass-gastrico-en-ecuador.webp',
       category: 'suites',
       title: 'Baño Privado Completo y Adaptado',
       desc: 'Ducha a ras de piso con barras de apoyo ergonómicas y grifería de alta gama adaptada para pacientes bariátricos.',
       badge: 'Accesibilidad'
     },
     {
-      src: 'images/sala-de-postoperatorio-cirugia-bypass-gastrico-en-guayaquil.jpg',
+      src: 'images/sala-de-postoperatorio-cirugia-bypass-gastrico-en-guayaquil.webp',
       category: 'quirofano',
       title: 'Sala de Postoperatorio y Cuidados Intermedios',
       desc: 'Monitoreo hemodinámico continuo durante las primeras horas posteriores a la intervención quirúrgica.',
       badge: 'Postoperatorio'
     },
     {
-      src: 'images/centro-medico-clinica-angeles-donde-opera-el-dr-carlos-gomez-en-guayaquil.jpg',
+      src: 'images/centro-medico-clinica-angeles-donde-opera-el-dr-carlos-gomez-en-guayaquil.webp',
       category: 'fachada',
       title: 'Centro Médico Clínica Ángeles · Ágora Medical',
       desc: 'Complejo médico de referencia en Guayaquil, equipado con infraestructura de última generación y parqueo privado.',
       badge: 'Centro Médico'
     },
     {
-      src: 'images/clinica-angeles-sector-mall-del-sol-en-guayaquil.jpg',
+      src: 'images/clinica-angeles-sector-mall-del-sol-en-guayaquil.webp',
       category: 'fachada',
       title: 'Ubicación de Prestigio · Sector Mall del Sol',
       desc: 'Ubicación estratégica y segura en Guayaquil, a solo 5 minutos del Aeropuerto Internacional José Joaquín de Olmedo.',
       badge: 'Ubicación'
     },
     {
-      src: 'images/acceso-por-codigo-qr-clinica-angeles-guayaquil-sector-mall-del-sol.jpg',
+      src: 'images/acceso-por-codigo-qr-clinica-angeles-guayaquil-sector-mall-del-sol.webp',
       category: 'comunes',
       title: 'Acceso Inteligente por Código QR',
       desc: 'Ingreso digitalizado y seguro para pacientes y familiares con control de accesos automatizado y alta bioseguridad.',
       badge: 'Seguridad'
     },
     {
-      src: 'images/personas-en-estados-unidos-visitan-ecuador-para-cirugia-bariatrica-con-el-dr-carlos-gomez.jpg',
+      src: 'images/personas-en-estados-unidos-visitan-ecuador-para-cirugia-bariatrica-con-el-dr-carlos-gomez.webp',
       category: 'comunes',
       title: 'Recepción y Pacientes Internacionales',
       desc: 'Servicio de conserjería médica y recepción preferencial para pacientes locales y procedentes de Estados Unidos y Europa.',
       badge: 'Recepción'
     },
     {
-      src: 'images/dr-carlos-gomez-en-clinica-angeles-guayaquil.jpg',
+      src: 'images/dr-carlos-gomez-en-clinica-angeles-guayaquil.webp',
       category: 'comunes',
       title: 'El Dr. Carlos Gómez en Clínica Ángeles',
       desc: 'Supervisión presencial y directa en cada fase de la experiencia: preoperatorio, quirófano y alta médica.',
       badge: 'Dr. Carlos Gómez'
     },
     {
-      src: 'images/cafeteria-clinica-angeles-guayaquil.jpg',
+      src: 'images/cafeteria-clinica-angeles-guayaquil.webp',
       category: 'comunes',
       title: 'Cafetería y Sala de Estar Premium',
       desc: 'Área de cafetería y descanso diseñada para brindar máxima comodidad y tranquilidad a los familiares visitantes.',
       badge: 'Cafetería Lounge'
     },
     {
-      src: 'images/cafeteria-clinica-angeles-ecuador.jpg',
+      src: 'images/cafeteria-clinica-angeles-ecuador.webp',
       category: 'comunes',
       title: 'Espacios de Confort y Espera Relajada',
       desc: 'Ambiente distinguido con conectividad de alta velocidad y servicio de cafetería de especialidad.',

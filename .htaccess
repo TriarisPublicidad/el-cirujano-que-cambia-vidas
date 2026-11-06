@@ -1,4 +1,10 @@
 # Apache / LiteSpeed — Dr. Carlos Gómez
+#
+# DIAGNÓSTICO (nov 2026): en producción este archivo existe pero el servidor NO devuelve las cabeceras de las
+# secciones 2 y 3 (ni siquiera en la raíz de WordPress). Falta activar en el hosting mod_headers y mod_expires
+# y permitir sobrescribir la configuración (AllowOverride FileInfo). Comprobar con:
+#   curl -I https://www.drcarlosgomez.doc.ec/el-cirujano-que-cambia-vidas/css/base.css
+# Debe mostrar Cache-Control/Expires; y en la página: Content-Security-Policy y Strict-Transport-Security.
 
 # 1. Compresión
 <IfModule mod_deflate.c>
@@ -31,10 +37,10 @@
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), fullscreen=(self \"https://www.youtube-nocookie.com\")"
   Header always set Cross-Origin-Opener-Policy "same-origin-allow-popups"
 
-  # CSP: solo se permite lo que usa el sitio (GTM y las plataformas de anuncios se cargan desde GTM).
-  # Si añades una etiqueta nueva en GTM y no carga, agrega su dominio aquí.
-  # Las etiquetas "HTML personalizado" de GTM necesitan 'unsafe-inline'; es preferible usar plantillas nativas.
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://analytics.tiktok.com https://googleads.g.doubleclick.net https://www.googleadservices.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com https://*.doubleclick.net https://www.google.com https://www.google.com.ec https://www.facebook.com https://analytics.tiktok.com; connect-src 'self' https://n8n.agenciasm.marketing https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.doubleclick.net https://www.googleadservices.com https://www.facebook.com https://analytics.tiktok.com; frame-src https://www.youtube-nocookie.com https://www.googletagmanager.com https://td.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
+  # CSP: solo se permite lo que usa el sitio. El contenedor GTM-TVL2KNGP (revisado en nov 2026) usa Google Tag (GA4),
+  # Google Ads, Conversion Linker y la plantilla de Meta Pixel; no tiene etiquetas "HTML personalizado" ni JavaScript
+  # personalizado, por eso no hace falta 'unsafe-inline'. Si se añade una etiqueta nueva y no carga, agregar su dominio aquí.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://analytics.tiktok.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://pagead2.googlesyndication.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com https://*.doubleclick.net https://*.googlesyndication.com https://www.google.com https://www.google.com.ec https://www.facebook.com https://analytics.tiktok.com; connect-src 'self' https://n8n.agenciasm.marketing https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.doubleclick.net https://*.googlesyndication.com https://adservice.google.com https://www.google.com https://www.google.com.ec https://www.googleadservices.com https://www.facebook.com https://analytics.tiktok.com; frame-src https://www.youtube-nocookie.com https://www.googletagmanager.com https://*.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
 </IfModule>
 
 # 4. Sin listado de directorios
