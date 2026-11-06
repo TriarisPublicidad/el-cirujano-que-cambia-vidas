@@ -13,7 +13,7 @@
 | Nombre comercial (schema) | Consulta Bariátrica Dr. Carlos Gómez [DEL SITIO] |
 | Titulación | MD FACS (Fellow of the American College of Surgeons) [DEL SITIO] |
 | Especialidad | Cirugía bariátrica y metabólica; tratamiento quirúrgico de obesidad y diabetes tipo 2 [DEL SITIO] |
-| Dominio | https://www.drcarlosgomez.doc.ec/ [DEL SITIO] |
+| Dominio | https://www.drcarlosgomez.doc.ec/el-cirujano-que-cambia-vidas |
 | Registro profesional (ACESS / SENESCYT) | [PENDIENTE] |
 | Razón social que gestiona datos de pacientes | CIBAE S.A.S. (Clínica Ángeles) [DEL SITIO, política de privacidad] |
 | Agencia / líder del desarrollo | Triaris |
@@ -28,27 +28,36 @@
 
 ---
 
-# 2. PALETA DE COLOR (HEX) [DEL SITIO, variables `:root`]
+# 2. PALETA DE COLOR (HEX) [DEL SITIO, variables `:root` en `css/base.css`]
+
+Sistema **Quiet Luxury**: fondos casi negros, un único acento dorado arena y blanco hueso para el texto. El verde viridian es de uso puntual (cifras clínicas, confirmaciones).
 
 ```
-Primario:            #0a6fb8
-Azul oscuro (navy):  #0d2a44
-Azul medio:          #1e4a73
-Acento claro:        #5fb2ea
-Texto:               #0d2a44
-Texto secundario:    #38516a
-Fondo claro:         #f5fafe
-Fondo suave:         #e6f3fc
-Borde:               #d3e3f0
-Blanco:              #ffffff
-Error:               #b4232c
+Obsidian (fondo base):      #090a0c
+Onyx (fondo de sección):    #111316
+Charcoal (superficie):      #17191e
+Alabaster (texto):          #f4f1e9
+Ivory (fondo de sellos):    #fcfbf8
+Stone (texto secundario):   #9a9893
+Gold (acento principal):    #c5b191
+Gold light (hover):         #d4c2a4
+Viridian (apoyo clínico):   #3f7964
+Hairline (bordes):          rgba(210, 194, 168, 0.14)
+Hairline fuerte:            rgba(210, 194, 168, 0.25)
+Error (formularios):        #f87171
 ```
-- Degradado hero: `#e6f3fc` → `#f5fafe`.
+- Reglas de uso: el dorado es el único color de acción (botones, enlaces activos, énfasis en cursiva de los títulos). No añadir colores de acento nuevos.
+- Escala del IMC (solo dentro de la calculadora): azul cielo (bajo peso), verde esmeralda (normal), ámbar (sobrepeso), naranja (obesidad I) y rojo (obesidad II/III).
+- Degradados: velos de fondo `obsidian → obsidian/75 → obsidian`; hero con sombreado negro de izquierda a derecha.
 - Paleta oficial confirmada por el cliente: [PENDIENTE]
+- **Histórico:** el sitio anterior (`.doc.ec`) usaba una paleta azul clara (`#0a6fb8`, `#0d2a44`, fondo `#f5fafe`). No aplica a esta landing. `gracias.html` todavía conserva ese tema.
 
 ## Tipografía [DEL SITIO]
-- Plus Jakarta Sans, pesos 500, 700 y 800. Fallback `system-ui`.
-- Alojamiento local WOFF2 (previsto en el plan de mejora): [PENDIENTE]
+- **Títulos:** Cormorant Garamond (serif), pesos 400 y 500, con cursiva 400 en dorado para el énfasis de cada título.
+- **Texto y interfaz:** Plus Jakarta Sans, pesos 300, 400, 500 y 600 (cursiva 400). Fallback `system-ui`.
+- **Etiquetas técnicas** (pasos, contadores): monoespaciada del sistema (`ui-monospace`).
+- Carga actual: Google Fonts con `display=swap`. Alojamiento local WOFF2: [PENDIENTE, siguiente tanda]
+- Los párrafos (`<p>`) se mantienen a 17 px con interlineado 1,65 en todo el sitio, igual que en producción.
 
 ## Logotipos y sellos (carpeta `images/`)
 - Logo principal: `logo-carlos-gomez.png`
@@ -87,7 +96,7 @@ Error:               #b4232c
 - **Diferenciadores** (a validar con el cliente):
   - Acreditación FACS.
   - Experiencia: **17 años** [confirmar].
-  - Volumen de cirugías: **+1.500 en el sitio actual vs +7.500 en la sección "10 razones"** [PENDIENTE: cifra oficial].
+  - Volumen de cirugías: **+7500 en el sitio actual vs +7.500 en la sección "10 razones"** [PENDIENTE: cifra oficial].
   - Cirugía laparoscópica mínimamente invasiva, 90 min de procedimiento, alta en 24-36 h [DEL SITIO].
   - Infraestructura propia: quirófano y suites hospitalarias [DEL SITIO].
   - Equipo multidisciplinario (nutrición, psicología) y financiamiento flexible [DEL SITIO].
@@ -125,8 +134,8 @@ Error:               #b4232c
 
 - Palabras clave principales: "cirugía bariátrica Guayaquil", "manga gástrica Guayaquil", "bypass gástrico Guayaquil" [BORRADOR]. Lista oficial: [PENDIENTE]
 - Páginas por intención de búsqueda: [PENDIENTE: una landing o una por procedimiento]
-- URL oficial de la landing: [PENDIENTE: `/` o `/cirugia-bariatrica-en-guayaquil/`]
-- Archivos existentes: `robots.txt`, `sitemap.xml`, `llms.txt`.
+- URL oficial de la landing: `https://www.drcarlosgomez.doc.ec/el-cirujano-que-cambia-vidas/` (canonical, `og:url`, JSON-LD y sitemap la usan; todas las rutas de imágenes y metas sociales son absolutas desde ese dominio).
+- Archivos existentes: `robots.txt`, `sitemap.xml`. Pendiente: `llms.txt`. Nota: como la landing está en una subcarpeta, los buscadores solo leen `robots.txt` y `sitemap.xml` desde la raíz del dominio; estos archivos deben copiarse o fusionarse allí.
 
 ---
 
@@ -144,12 +153,21 @@ Error:               #b4232c
 
 | Plataforma | ID / estado |
 |---|---|
-| Google Tag Manager | GTM-TVL2KNGP [DEL SITIO] |
-| GA4 | [PENDIENTE] |
-| Meta Pixel / CAPI | [PENDIENTE] |
+| Google Tag Manager | GTM-TVL2KNGP |
+| GA4 | 1384318510353602 |
+| Meta Pixel / CAPI | 1384318510353602 |
 | Google Ads (conversión) | [PENDIENTE] |
 | TikTok Pixel / Events API | [PENDIENTE] |
-| Banner de cookies / consentimiento | [PENDIENTE] |
+| Banner de cookies / consentimiento | Implementado: aviso propio (`#consent-banner`) + Google Consent Mode v2 en `js/tracking.js`. Decisión guardada en `localStorage` (`drg_consent`). |
+
+**Cómo está implementado** (`js/tracking.js`):
+- GTM (`GTM-TVL2KNGP`) es el único punto de carga de etiquetas. Se carga en `index.html` y `gracias.html`.
+- El consentimiento arranca **denegado** (`ad_storage`, `ad_user_data`, `ad_personalization`, `analytics_storage`) y pasa a concedido solo si la persona pulsa "Aceptar". En GTM, las etiquetas de Meta, Google y TikTok deben exigir ese consentimiento.
+- Eventos del `dataLayer` (cada uno lleva `event_id`): `click_whatsapp`, `calculate_bmi`, `generate_lead` (solo si el envío a n8n tuvo éxito; incluye `form_id`).
+- El mismo `event_id` de `generate_lead` se envía al webhook de n8n para deduplicar con la API de conversiones (CAPI).
+- Se conservan `utm_*`, `fbclid`, `gclid` y `ttclid` durante la sesión y viajan con el formulario.
+
+> Revisar: en esta tabla GA4 y Meta Pixel comparten el mismo número. Un ID de GA4 empieza por `G-`, así que uno de los dos es incorrecto.
 
 Los tokens y secretos de CAPI **no se guardan en el repositorio**: variables de entorno en el servidor/n8n.
 
@@ -157,8 +175,11 @@ Los tokens y secretos de CAPI **no se guardan en el repositorio**: variables de 
 
 # 9. DIRECTRICES VISUALES
 
-- Estilo [DEL SITIO]: limpio, clínico y luminoso; fondos blanco y celeste suave, tarjetas con sombra suave y esquinas redondeadas (8 a 24 px), franja superior de color primario en las tarjetas, secciones alternas blanco / `#f5fafe`.
-- Fotografía: retrato del doctor, quirófano y suites reales. Banco de referencias: [PENDIENTE]
-- Iconografía: [PENDIENTE]
+- Estilo [DEL SITIO]: **Quiet Luxury**. Oscuro, sobrio y editorial: secciones alternas `obsidian` / `onyx`, líneas finas (hairline) en lugar de sombras de color, **esquinas rectas** (sin redondeo; solo círculos en botones de play, iconos y WhatsApp), mucho espacio vertical (96 a 128 px por sección) y títulos serif grandes con una frase en cursiva dorada.
+- Interacción: aparición progresiva al hacer scroll, fondos fijos con parallax, tarjetas que se elevan y trazan una línea dorada inferior al pasar el mouse, y la sección "Cita privada" que se revela como telón al terminar la página (escritorio).
+- Etiquetas de sección ("eyebrow"): mayúsculas de 10,9 px con espaciado de 3,48 px y una línea dorada delante.
+- Botones: rectangulares, mayúsculas con espaciado amplio (3 px). Primario dorado sólido; secundario con borde dorado translúcido.
+- Fotografía: retrato del doctor, quirófano y suites reales de Clínica Ángeles. Las fotos se oscurecen con velos para integrarse al fondo. Banco de referencias: [PENDIENTE]
+- Iconografía: trazo lineal fino (Lucide, licencia ISC) en un sprite local `images/icons.svg`, en color dorado o stone. Los iconos de play, flecha, WhatsApp y ubicación son SVG propios en `images/`.
 - Restricciones visuales de marca: [PENDIENTE]
 - Uso del logo en imágenes: [PENDIENTE]

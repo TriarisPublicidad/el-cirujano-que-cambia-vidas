@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.sitemaps.org/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://drcarlosgomez.ec/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <loc>https://www.drcarlosgomez.doc.ec/el-cirujano-que-cambia-vidas/</loc>
+    <lastmod>2026-11-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://drcarlosgomez.ec/images/banner-doctor-carlos-gomez-cirugia-bariatrica-manga-gastrica-en-ecuador.jpg</image:loc>
+      <image:loc>https://www.drcarlosgomez.doc.ec/el-cirujano-que-cambia-vidas/images/banner-doctor-carlos-gomez-cirugia-bariatrica-manga-gastrica-en-ecuador.jpg</image:loc>
       <image:title>Dr. Carlos Gómez — Cirugía Bariátrica y Metabólica de Alta Precisión en Guayaquil</image:title>
     </image:image>
   </url>
