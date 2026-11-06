@@ -59,12 +59,14 @@ button { background: transparent; padding: 0; cursor: pointer; }
 [hidden] { display: none !important; }
 ::selection { background: var(--gold); color: var(--obsidian); }
 
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
 
-/* Iconos del sprite images/icons.svg */
+/* Iconos: sprite incrustado al inicio de <body> en index.html */
 .icon { width: 16px; height: 16px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .icon--sm { width: 14px; height: 14px; }
 .icon--gold { color: var(--gold); }
@@ -87,7 +89,7 @@ p { font-size: 17px; line-height: 1.65; }
   width: 100%;
   overflow: hidden;
   border-top: 1px solid var(--hairline);
-  padding-block: 96px;
+  padding-block: 72px;
 }
 .section--obsidian { background: var(--obsidian); }
 .section--onyx { background: var(--onyx); }
@@ -100,7 +102,7 @@ p { font-size: 17px; line-height: 1.65; }
   background-attachment: fixed;
 }
 @media (min-width: 1024px) {
-  .section { padding-block: 128px; }
+  .section { padding-block: 96px; }
 }
 
 /* Contenido de sección: apila bloques con separación amplia */

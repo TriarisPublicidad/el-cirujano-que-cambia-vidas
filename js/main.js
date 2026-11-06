@@ -312,6 +312,10 @@
       : window.innerHeight * 0.45;
     var active = 0;
     steps.forEach(function (card, i) { if (card.getBoundingClientRect().top <= targetY) active = i; });
+    // Al final de la sección la foto fija se va con el scroll y el último paso nunca cruzaría la línea:
+    // se activa cuando su borde superior sube al 60 % de la pantalla.
+    var last = steps.length - 1;
+    if (steps[last].getBoundingClientRect().top <= window.innerHeight * 0.6) active = last;
     if (active !== stepIndex) selectStep(active);
   }, { passive: true });
 
@@ -354,7 +358,9 @@
     else if (delta < -6 || y <= 100) header.classList.remove('header-hidden'); // subiendo: aparece
 
     var center = window.innerHeight / 2;
+    var isMobile = window.innerWidth < 768;
     parallaxItems.forEach(function (el) {
+      if (isMobile && el.id === 'hero-banner-img') { el.style.transform = ''; return; } // el hero móvil no usa parallax
       var speed = parseFloat(el.getAttribute('data-parallax')) || 0.1;
       var rect = el.parentElement.getBoundingClientRect();
       var offset = (rect.top + rect.height / 2 - center) * speed;

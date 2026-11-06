@@ -154,7 +154,7 @@ Error (formularios):        #f87171
 | Plataforma | ID / estado |
 |---|---|
 | Google Tag Manager | GTM-TVL2KNGP |
-| GA4 | 1384318510353602 |
+| GA4 | G-0PYMD6LKVR |
 | Meta Pixel / CAPI | 1384318510353602 |
 | Google Ads (conversión) | [PENDIENTE] |
 | TikTok Pixel / Events API | [PENDIENTE] |
@@ -180,6 +180,6 @@ Los tokens y secretos de CAPI **no se guardan en el repositorio**: variables de 
 - Etiquetas de sección ("eyebrow"): mayúsculas de 10,9 px con espaciado de 3,48 px y una línea dorada delante.
 - Botones: rectangulares, mayúsculas con espaciado amplio (3 px). Primario dorado sólido; secundario con borde dorado translúcido.
 - Fotografía: retrato del doctor, quirófano y suites reales de Clínica Ángeles. Las fotos se oscurecen con velos para integrarse al fondo. Banco de referencias: [PENDIENTE]
-- Iconografía: trazo lineal fino (Lucide, licencia ISC) en un sprite local `images/icons.svg`, en color dorado o stone. Los iconos de play, flecha, WhatsApp y ubicación son SVG propios en `images/`.
+- Iconografía: trazo lineal fino (Lucide, licencia ISC) en un sprite SVG incrustado al inicio de `index.html` (funciona también al abrir el archivo sin servidor), en color dorado o stone. Los iconos de play, flecha, WhatsApp y ubicación son SVG propios en `images/`.
 - Restricciones visuales de marca: [PENDIENTE]
 - Uso del logo en imágenes: [PENDIENTE]

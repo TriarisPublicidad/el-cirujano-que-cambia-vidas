@@ -104,6 +104,7 @@
 .hero__bg.bg-is-visible { opacity: 1; }
 .hero__zoom { width: 100%; height: 100%; transform: scale(1); transition: transform 4.5s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
 .hero__zoom.hero-zoomed { transform: scale(1.06); }
+.hero__zoom picture { display: block; width: 100%; height: 100%; }
 .hero__img { width: 100%; height: 115%; object-fit: cover; object-position: center; }
 .hero__shade-x { position: absolute; inset: 0; background: linear-gradient(to right, #000, rgba(0, 0, 0, 0.4), transparent); }
 .hero__shade-y { position: absolute; inset: 0; background: linear-gradient(to top, var(--obsidian), transparent, rgba(0, 0, 0, 0.2)); }
@@ -124,6 +125,23 @@
   .hero { padding-top: 130px; }
   .hero__content { padding-top: 84px; }
   .hero__title { font-size: 70px; }
+}
+
+/* Hero móvil: composición propia, con el doctor centrado (images/hero-mobile.jpg, recorte 4:5).
+   La foto va arriba, se funde con el fondo y el titular queda centrado debajo, superpuesto. */
+@media (max-width: 767px) {
+  .hero { padding-top: 0; }
+  .hero__bg { position: relative; inset: auto; aspect-ratio: 4 / 5; }
+  .hero__img { height: 100%; }
+  .hero__shade-x { display: none; }
+  .hero__shade-y { background: linear-gradient(to top, var(--obsidian) 0%, rgba(9, 10, 12, 0) 52%, rgba(9, 10, 12, 0.45) 100%); }
+  .hero__content { margin-top: -132px; padding-block: 0 56px; }
+  .hero__copy { max-width: none; align-items: center; gap: 22px; text-align: center; }
+  .hero__copy .eyebrow { justify-content: center; }
+  .hero__copy .eyebrow::before { display: none; }
+  .hero__title { font-size: 38px; line-height: 1.08; letter-spacing: -0.4px; }
+  .hero__actions { align-items: stretch; width: 100%; max-width: 360px; }
+  .hero__actions .btn { width: 100%; }
 }
 
 /* ==========================================================================
@@ -166,7 +184,7 @@
   position: absolute; top: -96px; left: -96px; width: 480px; height: 480px;
   border-radius: 50%; background: rgba(197, 177, 145, 0.05); filter: blur(110px); pointer-events: none;
 }
-.surgeon__inner { position: relative; z-index: 10; padding-block: 96px; }
+.surgeon__inner { position: relative; z-index: 10; padding-block: 72px; }
 .surgeon__grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
 
 .portrait { position: relative; }
@@ -207,7 +225,7 @@
   .kpi__value { font-size: 48px; }
 }
 @media (min-width: 1024px) {
-  .surgeon__inner { padding-block: 128px; }
+  .surgeon__inner { padding-block: 96px; }
   .surgeon__grid { grid-template-columns: repeat(2, 1fr); gap: 64px; }
   .portrait__stat { left: -32px; }
   .kpis { grid-template-columns: repeat(4, 1fr); }
@@ -410,7 +428,7 @@
    8. CALCULADORA (llamada a la acción)
    ========================================================================== */
 .bg-layer--calculator { --bg-opacity: 0.6; background-image: url("../images/cirugia-en-contra-del-sobrepeso-y-diabetes-en-guayaquil-bypass-gastrico.jpg"); }
-.cta-calc { display: flex; align-items: center; justify-content: center; min-height: 760px; padding-block: 320px; text-align: center; }
+.cta-calc { display: flex; align-items: center; justify-content: center; min-height: 520px; padding-block: 96px; text-align: center; }
 .cta-calc__inner { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; max-width: 56rem; margin-inline: auto; padding-inline: var(--gutter); }
 .cta-calc__eyebrow { display: block; margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); }
 .cta-calc__title { max-width: 48rem; margin-bottom: 16px; font-family: var(--font-serif); font-weight: 400; font-size: 30px; line-height: 1.2; color: var(--alabaster); }
@@ -426,7 +444,7 @@
   .cta-calc__actions { flex-direction: row; gap: 20px; max-width: none; }
   .cta-calc__actions .btn { width: auto; }
 }
-@media (min-width: 1024px) { .cta-calc { min-height: 840px; } .cta-calc__title { font-size: 48px; } }
+@media (min-width: 1024px) { .cta-calc { min-height: 600px; } .cta-calc__title { font-size: 48px; } }
 
 /* ==========================================================================
    9. EXCELENCIA · 10 razones
@@ -493,7 +511,7 @@
    11. PREGUNTAS FRECUENTES
    ========================================================================== */
 .section.faq-section { padding-block: 0; }
-.faq { max-width: 896px; margin-inline: auto; padding-block: 96px; display: flex; flex-direction: column; align-items: center; gap: 64px; }
+.faq { max-width: 896px; margin-inline: auto; padding-block: 72px; display: flex; flex-direction: column; align-items: center; gap: 64px; }
 .faq__list { width: 100%; max-width: 848px; border-top: 1px solid var(--hairline); }
 .faq-item { border-bottom: 1px solid var(--hairline); }
 .faq-item summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 24px; list-style: none; cursor: pointer; }
@@ -511,7 +529,7 @@
 .faq-item__link { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 12px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--gold); }
 .faq-item__link:hover { text-decoration: underline; }
 @media (min-width: 640px) { .faq-item__q { font-size: 24px; } }
-@media (min-width: 1024px) { .faq { padding-block: 128px; } }
+@media (min-width: 1024px) { .faq { padding-block: 96px; } }
 
 /* ==========================================================================
    12. CITA PRIVADA + PIE (se revela debajo del contenido en escritorio)
@@ -583,3 +601,29 @@ a.contact__value:hover { color: var(--gold); }
 }
 .fab:hover { transform: scale(1.1); }
 .fab img { width: 24px; height: 24px; }
+
+/* ==========================================================================
+   PÁGINA DE GRACIAS (gracias.html)
+   ========================================================================== */
+.thanks { position: relative; display: flex; flex-direction: column; min-height: 100vh; overflow: hidden; background: var(--obsidian); }
+.thanks__bg { position: absolute; inset: 0; pointer-events: none; opacity: 0.12; background: url("../images/doctor-carlos-gomez-cirugia-bariatrica-manga-gastrica-en-guayaquil.jpg") center / cover; }
+.thanks__veil { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, var(--obsidian), rgba(9, 10, 12, 0.82), var(--obsidian)); }
+.thanks__top { position: relative; z-index: 10; padding-block: 24px; border-bottom: 1px solid var(--hairline); }
+.thanks__top img { width: 160px; }
+.thanks__main { position: relative; z-index: 10; flex: 1; display: flex; align-items: center; justify-content: center; padding-block: 56px; }
+.thanks__box { display: flex; flex-direction: column; align-items: center; gap: 24px; max-width: 880px; margin-inline: auto; text-align: center; }
+.thanks__check { display: flex; align-items: center; justify-content: center; width: 72px; height: 72px; border-radius: 50%; color: var(--gold); background: var(--gold-tint); border: 1px solid var(--gold); }
+.thanks__check .icon { width: 32px; height: 32px; stroke-width: 2.25; }
+.thanks__title { font-family: var(--font-serif); font-weight: 400; font-size: 42px; line-height: 1.05; color: var(--alabaster); }
+.thanks__title em { font-style: italic; color: var(--gold); }
+.thanks__text { max-width: 40rem; font-weight: 300; color: var(--stone); }
+.thanks__steps { display: grid; grid-template-columns: 1fr; gap: 20px; width: 100%; margin-top: 16px; text-align: left; }
+.thanks__step { padding: 28px; }
+.thanks__step-num { display: block; font-family: var(--font-serif); font-style: italic; font-size: 36px; line-height: 40px; color: var(--gold); }
+.thanks__step h2 { margin: 16px 0 8px; font-family: var(--font-serif); font-size: 24px; line-height: 32px; color: var(--alabaster); }
+.thanks__step p { font-weight: 300; color: var(--stone); }
+.thanks__actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px; margin-top: 8px; }
+.thanks__creds { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; margin-top: 8px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone); }
+.thanks__creds strong { font-weight: 500; color: var(--alabaster); }
+@media (min-width: 640px) { .thanks__title { font-size: 56px; } }
+@media (min-width: 768px) { .thanks__steps { grid-template-columns: repeat(3, 1fr); } }
